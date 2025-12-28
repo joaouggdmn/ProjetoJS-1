@@ -8,11 +8,7 @@ let lista = document.querySelector('#lista');
 let card = document.querySelector('.card');
 
 
-let tarefas = [
-    'Estudar JavaScript',
-    'Fazer exercícios',
-    'Ler um livro'
-]
+let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
 
 function renderizarTarefas() {
 
@@ -63,6 +59,7 @@ btn.onclick = function (){
     input.value ='';
 
     removerSpans();
+    salvarTarefasNoStorage();
 
     }else{
         removerSpans();
@@ -91,5 +88,11 @@ function deletarTarefa(tar){
     tarefas.splice(tarefas.indexOf(tar.textContent), 1);
 
     renderizarTarefas();
+    salvarTarefasNoStorage();
 
+}
+
+function salvarTarefasNoStorage(){
+    
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
 }
